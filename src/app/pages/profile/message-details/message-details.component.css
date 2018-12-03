@@ -1,0 +1,33 @@
+.main {
+  margin-top: 20vh;
+}
+.name {
+  background-color: #eee;
+  /* display: inline-flex; */
+  padding-top: 10px;
+}
+.container-fluid {
+  height: 85vh;
+  border: 1px #eee solid;
+}
+.content {
+  padding: 10px;
+  height: 67vh;
+  overflow: auto;
+}
+
+.message-input {
+  background-color: #eee;
+}
+.input-box {
+  margin: 0px;
+  padding: 0px;
+}
+.avatarImg {
+  height: 40px;
+  width: 40px;
+}
+textarea {
+  border: 1px solid #eee;
+  border-radius: 5px;
+}

@@ -1,0 +1,28 @@
+<div class="modal-content">
+  <div class="modal-header ">
+    <h2 class="modal-title title capitalise " id="portfolioModalLabel">{{clickedPortfolio.title}}</h2>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body card-body body-margin text-justify m-2">
+    <div class="row ">
+      <div class="col-md-12">
+        <div class="row">
+          <p class="text-success capitalise">{{clickedPortfolio.category.name}}</p>
+        </div>
+        <hr>
+        <div class="row mb-5">
+          {{clickedPortfolio.description}}
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img src="{{clickedPortfolio.file}}" alt="" class="img-fluid img-raised rounded">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

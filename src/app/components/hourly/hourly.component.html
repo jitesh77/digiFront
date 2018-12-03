@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 ml-auto mr-auto text-center">
+      <h2 *ngIf="!list" class="title">Hourlies
+      </h2>
+      <h5 class="description">
+        <br>
+      </h5>
+      <div class="row">
+        <div *ngIf="message" class="col-md-8 ml-auto mr-auto text-center mt-4 mb-5">
+          <h4 class="title">{{message}}</h4>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- row-1 -->
+  <div class="row">
+    <div class="col-md-3" *ngFor="let hourly of hourliesData">
+      <a href="/hourly/{{hourly._id}}">
+        <div class="card card-blog">
+          <div class="card-header card-header-image">
+            <a href="/hourly/{{hourly._id}}">
+              <img class="img" src="{{hourly.file}}">
+            </a>
+          </div>
+          <div class="card-body ">
+            <h4 class="title-test text-center text-success">${{hourly.rate}} / Hr</h4>
+            <!-- <h6 class="card-category text-info">Crypto</h6> -->
+            <h4 class="card-title">
+              <a href="hourly/{{hourly._id}}">{{hourly.title | truncate:[30, '...']}}</a>
+            </h4>
+
+          </div>
+          <div class="card-footer ">
+            <div class="author">
+              <a href="/profile/{{hourly.authorId}}">
+                <img src="{{hourly.authorProfilePicture}}" alt="" class="avatar img-raised">
+                <span>{{hourly.authorFname}}</span>
+              </a>
+            </div>
+            <div class="stats ml-auto">
+              <i class="material-icons">stars</i>
+              <span> {{hourly.rating | number : '1.1-1'}}</span>
+              <!-- <ng-template>NA</ng-template> -->
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+  <!-- row-1 -->
+  <div *ngIf="!list" class="row text-center test mt-5 mb-5">
+    <div class="col-md-12">
+      <a href="hourlies/1">
+        <button class="btn btn-custom">Load More</button>
+      </a>
+    </div>
+  </div>
+</div>

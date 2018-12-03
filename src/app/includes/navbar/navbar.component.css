@@ -1,0 +1,14 @@
+img {
+  margin-left: 15px;
+}
+
+.custom-display {
+  display: none;
+}
+.dropdown-menu {
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.dropdown {
+  cursor: pointer;
+}

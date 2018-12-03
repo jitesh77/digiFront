@@ -1,0 +1,36 @@
+.comments-custom {
+  text-align: left;
+}
+.custom-icon {
+  position: absolute;
+  z-index: 9;
+  top: 20px;
+  margin-left: -20px;
+}
+.img-overlay {
+  position: relative;
+}
+
+.avatar i {
+  background: #fff;
+  font-size: 35px;
+  border: 1px solid #fff;
+  border-radius: 30px;
+  padding: 0px;
+}
+.avatar > .av-img {
+  height: 150px;
+  width: 150px;
+  overflow: hidden;
+}
+.main {
+  margin-top: 30vh;
+}
+.rounded-img {
+  border-radius: 50%;
+  height: 170px;
+  width: 180px;
+}
+.card-portfolio {
+  height: 300px;
+}

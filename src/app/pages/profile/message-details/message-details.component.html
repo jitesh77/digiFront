@@ -1,0 +1,50 @@
+<app-navprofile></app-navprofile>
+<div class="main">
+  <div class="main-raised">
+    <div class="container-fluid">
+      <div class="row name pl-4 pl-md-1">
+        <div class="col-1 ">
+          <img src="{{userData.profilePicture}}" alt="" class="avatarImg img-raised rounded-circle float-right">
+        </div>
+        <div class="col-5">
+          <b>
+            <h4 class="capitalize">{{userData.fname}} {{userData.lname}}</h4>
+          </b>
+        </div>
+      </div>
+
+      <div class="row content ml-3">
+        <div class="col-12">
+          <div class="row pl-3 pl-md-1" *ngFor="let message of messageData">
+            <div *ngIf="userData._id == message.to; else cImage" class="col-1">
+              <img src="{{currentUser.profilePicture}}" alt="" class="avatarImg img-raised rounded-circle float-right">
+            </div>
+            <ng-template #cImage>
+              <div class="col-1">
+                <img src="{{userData.profilePicture}}" alt="" class="avatarImg img-raised rounded-circle float-right">
+              </div>
+            </ng-template>
+            <div class="col-5">
+              <b *ngIf="userData._id == message.to; else cUserName">{{currentUser.fname}}</b>
+              <ng-template #cUserName>
+                <b> {{userData.fname}}</b>
+              </ng-template>
+              <p>{{message.body}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row message-input">
+        <div class="col-11 input-box">
+          <textarea rows="2" class="form-control" [(ngModel)]="messageBox"></textarea>
+        </div>
+        <div class="col-1  input-box">
+          <button (click)="addMessage()" class="btn btn-fab btn-warning btn-round">
+            <i class="material-icons">send</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

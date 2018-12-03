@@ -1,0 +1,25 @@
+/* .logo2 {
+  margin-top: -20px;
+} */
+.notification {
+  min-width: 300px;
+}
+.selling,
+.buying {
+  min-width: 200px;
+}
+.card-body {
+  padding: 2px !important;
+}
+.custom-link a:hover,
+.custom-link a:focus,
+.custom-link a:active {
+  /* border: 1px solid #eee; */
+  /* border-radius: 3px; */
+  background: #f4f4f4;
+  box-shadow: none;
+  color: #373733;
+}
+.dropdown {
+  cursor: pointer;
+}

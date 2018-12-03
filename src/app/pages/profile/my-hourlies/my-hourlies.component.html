@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 ml-auto mr-auto text-center">
+      <h2 class="title">Hourlies
+      </h2>
+      <h5 class="description">
+        <br>
+        <br>
+      </h5>
+    </div>
+
+  </div>
+  <!-- row-1 -->
+  <div class="row">
+    <div class="col-md-3" *ngFor="let hourly of myHourlies">
+
+      <div class="card card-blog">
+        <div class="card-header card-header-image">
+          <a routerLink="/hourly/{{hourly._id}}">
+            <img class="img" src="{{hourly.file}}">
+          </a>
+        </div>
+        <div class="card-body ">
+          <h4 class="title-test text-center text-success">${{hourly.rate}} / Hr</h4>
+          <!-- <h6 class="card-category text-info">Crypto</h6> -->
+          <h4 class="card-title">
+            <a routerLink="/hourly/{{hourly._id}}">{{hourly.title}}</a>
+          </h4>
+
+        </div>
+        <div class="card-footer justify-content-center">
+          <div class="row">
+            <button class="btn btn-fab btn-custom btn-round mr-3" routerLink="/dashboard/edit/hourly_post/{{hourly._id}}">
+              <i class="material-icons">edit</i>
+            </button>
+            <button class="btn btn-fab btn-custom btn-round ml-3">
+              <i class="material-icons">delete</i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- row-1 -->
+</div>

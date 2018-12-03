@@ -1,0 +1,9 @@
+<app-navbar></app-navbar>
+<!-- <div class="page-header header-filter" data-parallax="true" style="background-image: url('../assets/img/bg3.jpg');"></div> -->
+<app-headimg [tag]="name"></app-headimg>
+
+<div class="main main-raised">
+  <app-jobs [microjobsData]="microjobsData" [message]="message" [list]="list"></app-jobs>
+  <app-paginator (pageEvent)="receivePage($event)"></app-paginator>
+</div>
+<app-footer></app-footer>

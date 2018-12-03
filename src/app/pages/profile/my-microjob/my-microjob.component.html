@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 ml-auto mr-auto text-center">
+      <h2 class="title">My Microjobs
+        <!-- <a href="" class="btn btn-fab btn-round btn-warning pull-right" rel="tooltip" title="Filter List">
+            <i class="material-icons">filter_list</i>
+          </a> -->
+      </h2>
+      <h5 class="description">
+        <br>
+        <br>
+      </h5>
+    </div>
+
+  </div>
+  <!-- row-1 -->
+  <div class="row">
+    <div class="col-md-3" *ngFor="let microjob of myMicrojobs">
+
+      <div class="card card-blog">
+        <div class="card-header card-header-image">
+          <a routerLink="/microjob/{{microjob._id}}">
+            <img class="img" src="{{microjob.file}}">
+          </a>
+        </div>
+        <div class="card-body ">
+          <h4 class="title-test pull-right text-success">${{microjob.price}}</h4>
+          <h6 class="card-category text-success">{{microjob.category.name}}</h6>
+          <h4 class="card-title">
+            <a routerLink="/microjob/{{microjob._id}}">{{microjob.title}}</a>
+          </h4>
+
+        </div>
+        <div class="card-footer justify-content-center">
+          <div class="row">
+            <button class="btn btn-fab btn-custom btn-round mr-3" routerLink="/dashboard/edit/job_post/{{microjob._id}}">
+              <i class="material-icons">edit</i>
+            </button>
+            <button class="btn btn-fab btn-custom btn-round ml-3">
+              <i class="material-icons">delete</i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

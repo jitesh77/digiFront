@@ -1,0 +1,308 @@
+<div class="profile-page sidebar-collapse">
+  <app-navbar></app-navbar>
+  <ngx-spinner bdColor="rgba(255,255,255,1)" size="medium" color="#ff9800" type="ball-scale-multiple" style="height: 100vh;">
+  </ngx-spinner>
+  <!-- <div class="page-header header-filter" data-parallax="true" style="background-image: url('../assets/img/new/header-1.jpg');"></div> -->
+  <div *ngIf="!isLoading" class="main main-raised">
+    <div class="container">
+      <div class="row">
+        <!-- <div class="col-md-12 ml-auto mr-auto"> -->
+        <div class="col-md-12 col-sm-12 ml-auto mr-auto">
+          <div class="card card-full card-plain">
+            <!-- <div class="card-header card-header-warning text-center">
+              <h4 class="card-title text-uppercase">I will make statics website</h4>
+            </div> -->
+            <div class="card-body body-margin text-justify">
+              <div class="row ">
+
+                <div class="col-md-7">
+                  <div class="row">
+                    <h2 class="title capitalise">
+                      {{microjob.title}}
+
+                    </h2>
+                  </div>
+                  <div class="row">
+                    <p class="text-success capitalise">{{microjob.category.name}}</p>
+                  </div>
+                  <!-- row -->
+                  <div class="row">
+                    <div [innerHTML]="microjob.brDescription"></div>
+                  </div>
+
+                  <!-- row -->
+                  <!-- row -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <img src="{{microjob.file}}" alt="" class="img-fluid img-raised rounded">
+                    </div>
+                  </div>
+                  <!-- row -->
+                </div>
+
+                <div class="col-md-4 offset-md-1">
+                  <div class="row">
+                    <div class="card card-profile card-margin">
+
+                      <div class="card-body ">
+
+                        <!--  -->
+                        <div class="row text-center">
+                          <div class="col-md-12">
+                            <h2>
+                              <span class="text-warning title">${{microjob.price}}</span>
+                            </h2>
+
+                          </div>
+                        </div>
+                        <hr/>
+                        <!--  -->
+                        <div class="row text-center">
+                          <div class="col-md-12">
+
+                            <h4 class="card-title rating">
+                              <star-rating [starType]="'svg'" staticColor="ok" [rating]="microjob.rating" [readOnly]="true" labelText="({{microjob.rating | number : '1.1-1'}})"
+                                [showHalfStars]="true"></star-rating>
+                            </h4>
+                            {{microjob.ratingCount}} Votes
+                          </div>
+                        </div>
+
+                        <hr/>
+                        <div class="row  ml-auto mr-auto">
+                          <div class="col-md-12">
+                            <h4>
+
+                              <i class="fa fa-clock-o" aria-hidden="true"></i> Duration: {{microjob.duration}} Days
+                            </h4>
+                          </div>
+                        </div>
+
+
+                        <hr/>
+                        <a *ngIf="!authorUser; else user" class="btn  btn-warning btn-round btn-block" (click)="orderModal();">
+                          <i class="fa fa-paper-plane" aria-hidden="true"></i>Order</a>
+                        <ng-template #user>
+                          <button href="/dashboard" class="btn  btn-warning btn-round btn-block" (click)="onEdit()">
+                            <i class="material-icons">edit</i>Edit</button>
+                          <br>
+
+                          <button href="/dashboard" class="btn  btn-custom btn-round btn-block">
+                            <i class="material-icons">delete</i>Delete</button>
+                        </ng-template>
+
+
+                        <!-- test enhd -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- col -->
+                  <!-- urse details -->
+                  <div class="row">
+                    <div class="card card-profile">
+                      <div class="card-avatar">
+                        <a href="/profile/{{authorDetails._id}}">
+                          <img class="img" src="{{authorDetails.profilePicture}}">
+                        </a>
+                      </div>
+                      <div class="card-body ">
+                        <h6 class="card-category text-gray">{{authorDetails.tagline}}</h6>
+                        <a href="/profile/{{authorDetails._id}}"><h4 class="card-title">{{authorDetails.fname}} {{authorDetails.lname}}</h4></a>
+                        <p class="card-description">
+                          {{authorDetails.description | truncate:[100, '...']}}
+                        </p>
+                        <button (click)="messages()" class="btn btn-custom btn-round">
+                          <i class="material-icons">local_post_office</i> Contact</button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- urse details end-->
+                  <!-- ?tags start -->
+                  <div class="row text-center">
+                    <div class="card card-custom">
+                      <div class="card-body">
+                        <h4 class="card-title">Tags</h4>
+                        <span *ngFor="let tag of microjob.tags">
+                          <span class="badge badge-pill badge-default">{{tag.display}}</span>
+                        </span>
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- tags end -->
+                </div>
+                <!-- col-right-end -->
+              </div>
+
+
+              <div class="row">
+                <div class="col-lg-4 col-md-3">
+                  <div class="card">
+                    <div class="card-body ">
+                      <h5 class="card-category card-category-social">
+                        <i class="fa fa-usd" aria-hidden="true"></i>Jobs Completed
+                      </h5>
+                      <h2 class="card-title">
+                        <a href="#pablo">{{microjob.purchases}}</a>
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-3">
+                  <div class="card ">
+                    <div class="card-body ">
+                      <h5 class="card-category card-category-social">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>Jobs In Queue
+                      </h5>
+                      <h2 class="card-title">
+                        <a href="#pablo">{{microjob.queue}}</a>
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-3">
+                  <div class="card ">
+                    <div class="card-body ">
+                      <h5 class="card-category card-category-social">
+                        <i class="fa fa-star" aria-hidden="true"></i> Ratings
+                      </h5>
+                      <h4 class="card-title">
+                        <star-rating [starType]="'svg'" staticColor="negative" [rating]="microjob.rating" [readOnly]="true" labelText="({{microjob.rating | number : '1.1-1'}})"
+                          [showHalfStars]="true"></star-rating>
+                      </h4>
+                      {{microjob.ratingCount}} Votes
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <!-- ===================================== -->
+
+              <div class="row" *ngIf="reviewData.length > 0">
+                <div class="col-md-12 ml-auto mr-auto">
+                  <div id="comments">
+                    <div class="title">
+                      <h3>Reviews</h3>
+                    </div>
+                    <div class="row comments-custom" *ngFor="let review of reviewData">
+                      <div class="col-md-12 ml-auto mr-auto">
+
+                        <div class="card card-custom">
+                          <div class="card-body ">
+                            <h5 class="card-title pl-1">
+                              {{review.review}}
+                            </h5>
+                            <span class="justify-content-left">
+                              <star-rating [starType]="'svg'" staticColor="ok" [rating]="review.rating" [readOnly]="true" [showHalfStars]="true"></star-rating>
+                            </span>
+                          </div>
+                          <div class="card-footer ">
+                            <div class="author capitalise text-muted pl-1">
+                              <a href="/profile/{{review.senderId}}">
+                                {{review.senderFname}}
+                              </a>
+                            </div>
+                            <div class="stats ml-auto">
+                              {{review.createdAt | timeAgo}}
+                              <!-- <i class="material-icons">chat_bubble</i> 45 -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ======================================= -->
+
+            </div>
+            <!-- card-body -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div *ngIf="postOrder; else message" class="modal-content">
+      <div class="modal-header ">
+        <h2 class="modal-title " id="exampleModalLabel">Order Form</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-success">
+        <form (ngSubmit)="onSubmit(orderMicrojob)" [formGroup]="orderMicrojob">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" [ngClass]="{'has-danger': orderMicrojob.get('title').hasError('required') && orderMicrojob.get('title').touched}">
+                <label>Message Subject*</label>
+                <input type="text" class="form-control" formControlName="title">
+                <span class="text-danger float-left" *ngIf="orderMicrojob.get('title').hasError('required') && orderMicrojob.get('title').touched">
+                  <h6>Subject is required</h6>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" [ngClass]="{'has-danger': orderMicrojob.get('duration').hasError('required') && orderMicrojob.get('duration').touched}">
+                <label>Expected Delivery In (Days)*</label>
+                <input type="number" class="form-control" formControlName="duration">
+                <span class="text-danger float-left" *ngIf="orderMicrojob.get('duration').hasError('required') && orderMicrojob.get('duration').touched">
+                  <h6>Duration is required</h6>
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" [ngClass]="{'has-danger': orderMicrojob.get('description').hasError('required') && orderMicrojob.get('description').touched}">
+                <label>Other Details*</label>
+                <textarea type="text" rows="10" class="form-control" formControlName="description"></textarea>
+                <span class="text-danger float-left" *ngIf="orderMicrojob.get('duration').hasError('required') && orderMicrojob.get('duration').touched">
+                  <h6>Description is required</h6>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-custom btn-round text-center" [disabled]="orderMicrojob.invalid">Submit</button>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+
+    <ng-template #message>
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <h2 class="title" id="exampleModalLabel">Order Submitted</h2>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+        </div>
+        <div class="modal-body text-success text-center">
+          <button type="button" class="btn btn-round btn-warning" data-dismiss="modal" aria-label="Close">
+            Close
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+  </div>
+
+
+</div>

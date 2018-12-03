@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+/*  */
+.card-custom {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.form-error {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+option,
+select {
+  text-transform: capitalize;
+}
+
+.form-control,
+.is-focused > .form-control {
+  background: rgb(248, 248, 248) !important;
+  border: 1px solid #eee !important;
+  border-radius: 0%;
+}
+
+.is-focused > .bmd-label-static {
+  color: #ff9800 !important;
+}
+.main,
+.main-raised {
+  min-height: 70vh;
+}
+.capitalise {
+  text-transform: capitalize;
+}
+.rating {
+  -webkit-box-align: left;
+  -webkit-align-items: left;
+  -moz-box-align: left;
+  -ms-flex-align: left;
+  align-items: left;
+  -webkit-box-pack: left;
+  -webkit-justify-content: left;
+  -moz-box-pack: left;
+  -ms-flex-pack: left;
+  justify-content: left;
+}
+
+a {
+  cursor: pointer;
+}
+
+.bck {
+  background-color: transparent !important;
+  /* margin-top: -10px; */
+}
+/* tag-input {
+  padding: 0px;
+  margin: 0px;
+} */
+tag {
+  margin-top: -10px;
+}
+.ng2-tags-container {
+  background: rgb(248, 248, 248) !important;
+  border: 1px solid #eee !important;
+  border-radius: 0%;
+}

@@ -1,0 +1,144 @@
+<div class="col-md-10 col-lg-10 ml-auto mr-auto">
+  <div class="row text-center ">
+    <div class="col-md-12">
+      <h3 class="title">Post An Hourly</h3>
+      <!-- <app-alert></app-alert> -->
+    </div>
+  </div>
+  <form (ngSubmit)="onSubmit(hourlyjob)" [formGroup]="hourlyjob">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Title*</label>
+          <input type="text" class="form-control" formControlName="title">
+          <span class="bmd-help">Minimum 5 characters</span>
+          <span class="text-danger form-error float-right" *ngIf="hourlyjob.get('title').hasError('required') && hourlyjob.get('title').touched">
+            <h6>Title is required</h6>
+          </span>
+          <span class="text-danger form-error float-right" *ngIf="hourlyjob.get('title').hasError('minlength') && hourlyjob.get('title').touched">
+            <h6> Minimum of 5 characters </h6>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Hourly Rate In Dollars *</label>
+          <input type="text" class="form-control" formControlName="rate">
+          <span class="text-danger form-error float-right" *ngIf="hourlyjob.get('rate').hasError('required') && hourlyjob.get('rate').touched">
+            <h6>Rate is required</h6>
+          </span>
+        </div>
+      </div>
+      <!--  -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Delivery In Days*</label>
+          <input type="number" class="form-control" formControlName="duration">
+          <span class="text-danger form-error float-right" *ngIf="hourlyjob.get('duration').hasError('required') && hourlyjob.get('duration').touched">
+            <h6>Duration is required</h6>
+          </span>
+        </div>
+      </div>
+      <!--  -->
+    </div>
+    <!--  -->
+
+    <div class="row">
+      <!--  -->
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Categories*</label>
+          <!-- <input type="text" class="form-control" formControlName="category"> -->
+          <select class="form-control" formControlName="category">
+            <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
+          </select>
+          <span class="text-danger form-error float-right" *ngIf="hourlyjob.get('category').hasError('required') && hourlyjob.get('category').touched">
+            <h6>Category is required</h6>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group" *ngIf="!hourlyjob.get('category').hasError('required')">
+          <label>Subcategory*</label>
+          <select class="form-control" formControlName="subCategory">
+            <option *ngFor="let subcategory of subCategoryList" [ngValue]="subcategory">{{subcategory.name}}</option>
+          </select>
+          <span class="text-danger form-error float-right" *ngIf="hourlyjob.get('subCategory').hasError('required') && hourlyjob.get('subCategory').touched">
+            <h6>Subcategory is required</h6>
+          </span>
+        </div>
+      </div>
+      <!--  -->
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <label> Tags* (Select from dropdown or add your own tag. Press enter to save.)</label>
+        <div>
+          <tag-input inputClass="bck" formControlName="tags" [theme]="'minimal'" name="items" [onlyFromAutocomplete]="false" [placeholder]="'Tags'"
+            [secondaryPlaceholder]="'+'">
+            <tag-input-dropdown [showDropdownIfEmpty]="false" [dynamicUpdate]="false" [displayBy]="'name'" [identifyBy]="'_id'" [autocompleteItems]="allTagList"
+              [limitItemsTo]="3">
+              <ng-template let-item="item" let-index="index">
+                {{ item.name }}
+              </ng-template>
+            </tag-input-dropdown>
+          </tag-input>
+          <span class="text-danger form-error float-right" *ngIf="hourlyjob.get('tags').hasError('required') && hourlyjob.get('tags').touched">
+            <h6>Tag is required</h6>
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+    <!--  -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Description*</label>
+          <textarea type="text" rows="10" class="form-control" formControlName="description"></textarea>
+          <span class="text-danger form-error float-right" *ngIf="hourlyjob.get('description').hasError('required') && hourlyjob.get('description').touched">
+            <h6>Description is required</h6>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Add Images*</label>
+          <br>
+          <input type="file" id="fileIn" class="form-file form-control" (change)="onFileChange($event)" hidden>
+          <button type="button" class="btn btn-fab btn-round btn-warning" (click)="selectFileInput()">
+            <i class="material-icons">add</i>
+          </button>
+          <!-- <button type="button" class="btn btn-small btn-warning" (click)="selectFileInput()">Add Image</button> -->
+          {{selectedFileName}}
+          <button *ngIf="selectedFile" type="button" class="btn btn-small btn-warning ml-5" (click)="upload()">Upload</button>
+          <span class="text-warning"> {{uploadMessage}} </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <img *ngIf="imageUrl" src={{imageUrl}} alt="" width="300px" height="300px">
+      </div>
+
+    </div>
+    <flash-messages class="text-center"></flash-messages>
+    <!--  -->
+    <div class="text-center test">
+      <button type="submit" class="btn btn-warning btn-round" [disabled]="hourlyjob.invalid"> Save </button>
+      <!-- <a routerLink="/dashboard" class="btn btn-warning btn-round">Save</a> -->
+    </div>
+    <div class="test">
+
+    </div>
+  </form>
+</div>

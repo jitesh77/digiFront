@@ -1,0 +1,67 @@
+<nav class="navbar navbar-default fixed-top navbar-expand-md" color-on-scroll="100" id="sectionsNav">
+  <div class="container">
+    <div class="navbar-translate">
+      <a class="navbar-brand" routerLink="/">
+        <img id="logo1" src="../assets/img/digi/1.png" alt="logo" width="130px" height="40px" style="margin-top: -11px;">
+        <!-- <h4 id="logo2">
+          <strong>Digiwage</strong>
+        </h4> -->
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">
+            <i class="material-icons">home</i> Home
+          </a>
+        </li>
+        <!-- 
+
+  translation Advertising Blockchain Business Crypto+ Graphics Logo Design Music & Audio Other Programming Silly Stuff More
+ -->
+        <li class="dropdown nav-item">
+          <a class="dropdown-toggle nav-link" data-toggle="dropdown">
+            <i class="material-icons">apps</i> Categories
+          </a>
+
+          <div class="dropdown-menu ">
+            <div *ngFor="let category of categories">
+              <a [routerLink]="['/category']" [queryParams]="{name: category.name, id: category._id}" class="dropdown-item">
+                {{category.name}}
+              </a>
+
+            </div>
+
+          </div>
+        </li>
+        <li class="nav-item">
+          <div *ngIf="isLoggedin; else login">
+            <div class="dropdown nav-item">
+              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                <i class="material-icons">account_circle</i>{{currentUser}}
+              </a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a routerLink="/dashboard" class="dropdown-item">Account</a>
+                <!-- <a routerLink="/dashboard" class="dropdown-item">Settings</a> -->
+                <a routerLink="/" class="dropdown-item" (click)="logOut()">Sign out</a>
+              </div>
+            </div>
+          </div>
+          <ng-template #login>
+            <div>
+              <a routerLink="/login">
+                <button class="btn btn-small btn-warning">
+                  <i class="material-icons"> fingerprint</i> Login</button>
+              </a>
+            </div>
+          </ng-template>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

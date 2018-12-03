@@ -1,0 +1,82 @@
+<div class="col-md-12col-lg-12 ml-auto mr-auto">
+  <div class="row text-center ">
+    <div class="col-md-12">
+      <h3 class="title">Messages</h3>
+    </div>
+  </div>
+  <div class="col-md-12" *ngFor="let receiver of messageListData">
+    <div *ngIf="receiver.pOne == currentUser.id; else user">
+      <a routerLink="/messages/room/{{receiver.room}}/{{receiver.pTwo}}">
+        <div class="card card-custom">
+          <div class="card-body">
+            <div class="row">
+              <!-- name start -->
+              <div class="col-md-2 align-middle">
+                <div class="author">
+                  <img src="{{receiver.pTwoImage}}" alt="..." class="avatar img-raised">
+                  <span class="title">{{receiver.pTwoFname}}</span>
+                </div>
+              </div>
+              <!-- name-end -->
+              <!-- description start -->
+              <div class="col-md-7">
+                {{receiver.lastMessage}}
+              </div>
+              <!-- desc end -->
+              <!-- time start -->
+              <div class="col-md-3">
+                {{receiver.updatedAt | timeAgo}}
+                <!-- <a href="" class="text-danger pull-right">
+              <i class="material-icons">delete</i>
+            </a> -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <ng-template #user>
+      <a routerLink="/messages/room/{{receiver.room}}/{{receiver.pOne}}">
+        <div class="card card-custom">
+          <div class="card-body">
+            <div class="row">
+              <!-- name start -->
+              <div class="col-md-2 align-middle">
+                <div class="author">
+                  <img src="{{receiver.pOneImage}}" alt="..." class="avatar img-raised">
+                  <span class="title">{{receiver.pOneFname}}</span>
+                </div>
+              </div>
+              <!-- name-end -->
+              <!-- description start -->
+              <div class="col-md-7">
+                {{receiver.lastMessage}}
+              </div>
+              <!-- desc end -->
+              <!-- time start -->
+              <div class="col-md-3">
+                {{receiver.updatedAt | timeAgo}}
+                <!-- <a href="" class="text-danger pull-right">
+                <i class="material-icons">delete</i>
+              </a> -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </ng-template>
+  </div>
+</div>
+
+<!-- 
+                <ng-template class="col-md-2 align-middle" #user>
+                <div class="author">
+                  <img src="{{receiver.pOneImage}}" alt="..." class="avatar img-raised">
+                  <span class="title">{{receiver.pOneFname}}</span>
+                </div>
+
+              </ng-template>
+ -->

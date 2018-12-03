@@ -1,0 +1,184 @@
+<div class="profile-page sidebar-collapse">
+  <app-navbar></app-navbar>
+  <!-- <div class="page-header header-filter" data-parallax="true" style="background-image: url('../assets/img/bg7.jpg');"></div> -->
+  <div class="main main-raised">
+    <div class="profile-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile">
+              <div class="avatar">
+                <span class="a4v-img">
+                  <img src="{{userData.profilePicture}}" alt="Circle Image" class="img-raised rounded-img">
+                </span>
+                <i class="material-icons text-default custom-icon ">fiber_manual_records</i>
+
+              </div>
+              <div class="name">
+                <h3 class="title capitalise">{{userData.fname}} {{userData.lname}}</h3>
+                <h6>{{userData.tagline}}</h6>
+                <!-- <a href="#pablo" class="btn btn-just-icon btn-link btn-dribbble">
+                  <i class="fa fa-dribbble"></i>
+                </a>
+                <a href="#pablo" class="btn btn-just-icon btn-link btn-twitter">
+                  <i class="fa fa-twitter"></i>
+                </a>
+                <a href="#pablo" class="btn btn-just-icon btn-link btn-pinterest">
+                  <i class="fa fa-pinterest"></i>
+                </a> -->
+              </div>
+            </div>
+            <div class="follow">
+              <button class="btn btn-warning btn-fab btn-round" (click)=" message()">
+                <i class="material-icons">message</i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="description text-center">
+          <p>{{userData.description }}</p>
+        </div>
+        <!-- <div class="row">
+          <div class="col-md-12">
+            <button class="btn btn-custom">Contact</button>
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile-tabs">
+              <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
+                <!--
+                  color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+              -->
+                <li class="nav-item">
+                  <a class="nav-link active" href="#work" role="tab" data-toggle="tab">
+                    <i class="material-icons">work</i> Portfolio
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#media" role="tab" data-toggle="tab">
+                    <i class="material-icons">verified_user</i> Reviews
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content tab-space">
+          <div class="tab-pane active work" id="work">
+            <div class="row">
+              <div class="col-md-7 ml-auto mr-auto ">
+                <h4 class="title">Portfolio</h4>
+                <div class="row collections">
+                  <div class="col-md-6" *ngFor="let portfolio of portfolioData">
+                    <!-- <div class="card card-background" style="background-image: url('../assets/img/examples/mariya-georgieva.jpg')">
+                      <a href="#pablo"></a>
+                      <div class="card-body">
+                        <label class="badge badge-warning">Spring 2016</label>
+                        <a href="#pablo">
+                          <h2 class="card-title">Stilleto</h2>
+                        </a>
+                      </div>
+                    </div> -->
+                    <div class="card card-portfolio card-blog">
+                      <div class="card-header card-header-image">
+                        <a data-toggle="modal" data-target="#portfolioModal" (click)="portfolioModal(portfolio)">
+                          <img class="img" src="{{portfolio.file}}">
+                        </a>
+                      </div>
+                      <div class="card-body ">
+                        <h6 class="card-category text-success">{{portfolio.category.name}}</h6>
+                        <h4 class="card-title">
+                          <a data-toggle="modal" data-target="#portfolioModal" (click)="portfolioModal(portfolio)">{{portfolio.title}}</a>
+                        </h4>
+
+                      </div>
+                      <div class="card-footer ">
+
+                        <div class="stats ml-auto">
+                          <!-- <i class="material-icons">schedule</i> 5 min read -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-2 mr-auto ml-auto stats">
+                <h4 class="title">Stats</h4>
+                <ul class="list-unstyled">
+                  <li>
+                    <b>{{userData.microjobsCount}}</b> Microjobs</li>
+                  <li *ngIf="userData.hourlyCount">
+                    <b>{{userData.hourlyCount}}</b> Hourlies</li>
+                  <li *ngIf="userData.earned">
+                    <b *ngIf="userData.earned else zero">${{userData.earned}}</b>
+                    Earned</li>
+                  <li *ngIf="userData.rating">
+                    <b>{{userData.rating | number : '1.2-2'}}</b> Rating</li>
+                  <!-- <li>
+                    <b>{{userData.ratingCount}}</b> Reviews</li> -->
+                </ul>
+                <hr>
+
+                <h4 class="title">Skills</h4>
+                <span class="badge badge-primary ml-1" *ngFor="let skill of userData.skills">{{skill.name}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane text-center gallery" id="media">
+            <!-- ===================================== -->
+
+            <div class="row" *ngIf="reviewData.length > 0">
+              <div class="col-md-12 ml-auto mr-auto">
+                <div id="comments">
+                  <div class="title">
+                    <h3>Reviews</h3>
+                  </div>
+                  <div class="row comments-custom" *ngFor="let review of reviewData">
+                    <div class="col-md-12 ml-auto mr-auto">
+
+                      <div class="card card-custom">
+                        <div class="card-body ">
+                          <h5 class="card-title pl-1">
+                            {{review.review}}
+                          </h5>
+                          <span class="justify-content-left">
+                            <star-rating [starType]="'svg'" staticColor="ok" [rating]="review.rating" [readOnly]="true" [showHalfStars]="true"></star-rating>
+                          </span>
+                        </div>
+                        <div class="card-footer ">
+                          <div class="author capitalise text-muted pl-1">
+                            <a href="/profile/{{review.senderId}}">
+                              {{review.senderFname}}
+                            </a>
+                          </div>
+                          <div class="stats ml-auto">
+                            {{review.createdAt | timeAgo}}
+                            <!-- <i class="material-icons">chat_bubble</i> 45 -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- ======================================= -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="clickedPortfolio" class="modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-labelledby="portfolioModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <app-portfolio [clickedPortfolio]="clickedPortfolio"></app-portfolio>
+  </div>
+</div>
+<app-footer></app-footer>

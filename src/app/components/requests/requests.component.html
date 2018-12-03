@@ -1,0 +1,71 @@
+<ngx-spinner bdColor="rgba(255,255,255,1)" size="medium" color="#ff9800" type="ball-scale-multiple" style="height: 100vh;">
+</ngx-spinner>
+<div class="blogs-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 ml-auto mr-auto text-center">
+        <h2 *ngIf="!list" class="title">Buyer Requests</h2>
+      </div>
+    </div>
+    <h5 class="description">
+      <br>
+      <br>
+    </h5>
+    <div class="row">
+      <div *ngIf="message" class="col-md-8 ml-auto mr-auto text-center mt-5 mb-5">
+        <h4 class="title">{{message}}</h4>
+      </div>
+    </div>
+    <div class="row">
+
+      <!--  -->
+      <div class="card card-custom" *ngFor="let request of requestData">
+        <div class="row">
+          <div class="col-md-9">
+            <h6 class=" card-category text-info ">{{request.category.name}}</h6>
+            <h3 class="card-title ">
+              <a href="/buyers_req/{{request._id}}">{{request.title}}</a>
+            </h3>
+            <p class="card-description ">
+              {{request.description | truncate:[300, '...'] }}
+
+            </p>
+            <p>
+              <a href="/buyers_req/{{request._id}}"> Read More </a>
+            </p>
+            <p class="author ">
+              by
+              <a href="/profile/{{request.authorId}}">
+                <b>{{request.authorFname}}</b>
+              </a>, {{request.updatedAt | timeAgo}}
+            </p>
+          </div>
+
+
+          <div class="col-md-3 ">
+            <div class="card card-profile text-center card-plain ">
+              <div>
+                <h3 class="card-title text-default ">$ {{request.budget}}</h3>
+                <h6>Duration: {{request.duration}} Days</h6>
+              </div>
+              <div class="card-body ">
+                <a href="buyers_req/{{request._id}}">
+                  <button type="button " class="btn-custom btn ">Send Request</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!list" class="row text-center test mt-5 mb-5">
+      <div class="col-md-12">
+        <a href="/buyer_requests/1">
+          <button class="btn btn-custom">Load More</button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+</div>

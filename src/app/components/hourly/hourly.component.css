@@ -1,0 +1,26 @@
+.card-header-image {
+  height: 150px;
+  overflow: hidden;
+}
+.img {
+  min-height: 150px;
+}
+.card-footer i {
+  margin-top: 5px;
+}
+.title-test {
+  font-weight: 700;
+  font-family: "Roboto Slab", "Times New Roman", serif;
+}
+.card:hover {
+  background-color: #eee;
+  transition: background-color ease-in-out 0.5s;
+}
+
+.card-title {
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+.card {
+  height: 300px;
+}

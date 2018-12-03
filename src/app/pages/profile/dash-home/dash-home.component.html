@@ -1,0 +1,511 @@
+<ngx-spinner bdColor="rgba(255,255,255,1)" size="medium" color="#ff9800" type="ball-scale-multiple" style="height: 100vh;">
+</ngx-spinner>
+<div class="row" *ngIf="!isLoading">
+  <div class="col-md-5 mr-auto ml-auto">
+    <div class="card card-profile">
+      <div class="card-avatar">
+        <a href="/profile/{{user._id}}">
+          <img class="img" src={{user.profilePicture}}>
+        </a>
+      </div>
+      <div class="card-body ">
+        <h6 class="card-category text-gray">{{user.tagline}}</h6>
+        <h4 class="card-title">{{user.fname}} {{user.lname}}</h4>
+        <p class="card-description">
+          {{user.description}}
+        </p>
+      </div>
+      <div class="card-footer footer-edit">
+        <a routerLink="update" class="btn btn-custom btn-block btn-edit">
+          <i class="material-icons">create</i> Edit</a>
+      </div>
+    </div>
+  </div>
+  <!-- col end -->
+  <div class="col-md-7 mx-auto">
+    <div class="row">
+      <div class="col-lg-4 col-md-3">
+        <div class="card bg-info">
+          <div class="card-body ">
+            <h5 class="card-category card-category-social">
+              <i class="fa fa-usd" aria-hidden="true"></i>Total Earnings
+            </h5>
+            <h2 class="card-title">
+              <span *ngIf="user.received > 1; else zero">${{user.received}}</span>
+              <ng-template #zero>
+                <span> $ 0</span>
+              </ng-template>
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-3">
+        <div class="card bg-success">
+          <div class="card-body ">
+            <h5 class="card-category card-category-social">
+              <i class="fa fa-briefcase" aria-hidden="true"></i>Jobs Posted
+            </h5>
+            <h2 class="card-title">
+              <a href="#pablo">{{jobsPostedCount}}</a>
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-3">
+        <div class="card bg-warning">
+          <div class="card-body ">
+            <h5 class="card-category card-category-social">
+              <i class="fa fa-star" aria-hidden="true"></i> Ratings
+            </h5>
+            <star-rating [starType]="'svg'" staticColor="default" [rating]="user.rating" [readOnly]="true" labelText="({{user.rating | number : '1.1-1'}})"
+              [showHalfStars]="true"></star-rating>
+            {{user.ratingCount}} reviews
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--  skills start -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title">Skills</div>
+        <div>
+          <span class="badge badge-pill badge-default" *ngFor="let skill of user.skills">{{skill.display}}</span>
+        </div>
+        <div *ngIf="user.skills.length == 0" class="col-md-12 text-center">
+          <h5 class="text-muted">Profiles with skills have higher chance of getting hired</h5>
+          <a routerLink="update" class="btn  btn-custom ">
+            Add Skills
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <!--  skills -end  -->
+  </div>
+  <!--  left end -->
+  <div class="col-ld-12 col-md-12 ">
+    <hr>
+    <!--  job form buttons start -->
+    <div class="row mx-auto justify-content-center">
+      <div class="mx-auto">
+        <a routerLink="req_post">
+          <button class="btn mr-5 btn-custom">
+            <i class="material-icons">add_to_photos</i>
+            Request A Job</button>
+        </a>
+        <a routerLink="job_post">
+          <button class="btn mr-5  btn-custom">
+            <i class="material-icons">create</i> Post A Job</button>
+        </a>
+        <a routerLink="hourly_post">
+          <button class="btn  btn-custom">
+            <i class="material-icons">av_timer</i> Post An Hourly</button>
+        </a>
+      </div>
+
+    </div>
+    <!-- job forms end -->
+  </div>
+  <!-- ======================== -->
+
+  <div class="col-lg-12 col-md-12">
+    <!-- <hr/> -->
+    <!-- =================================== -->
+    <div class="row">
+      <div class="col-md-12 ml-auto mr-auto">
+        <div class="profile-tabs">
+          <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
+            <!--
+              color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+          -->
+            <li class="nav-item">
+              <a class="nav-link active" href="#portfolio" role="tab" data-toggle="tab">
+                <i class="material-icons">work</i> Portfolio
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#selling" role="tab" data-toggle="tab">
+                <i class="material-icons">turned_in</i> Selling
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#buying" role="tab" data-toggle="tab">
+                <i class="material-icons">verified_user</i> Buying
+              </a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="#stats" role="tab" data-toggle="tab">
+                <i class="material-icons">verified_user</i> Stats
+              </a>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== -->
+    <!-- portfolio start -->
+    <div class="tab-content tab-space">
+      <div class="tab-pane active work" id="portfolio">
+        <!--  -->
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+            <h4 class="title">Portfolio
+              <a routerLink="portfolio_post" class="btn btn-fab btn-round btn-custom pull-right">
+                <i class="material-icons">add</i>
+              </a>
+            </h4>
+          </div>
+          <div class="col-lg-3 col-md-3" *ngFor="let portfolio of portfolioData">
+            <div class="card card-blog">
+              <div class="card-header card-header-image">
+                <a data-toggle="modal" data-target="#portfolioModal" (click)="portfolioModal(portfolio)">
+                  <img class="img" src="{{portfolio.file}}">
+                </a>
+              </div>
+              <div class="card-body ">
+                <h6 class="card-category text-success">{{portfolio.category.name}}</h6>
+                <h4 class="card-title card-portfolio-title">
+                  <a data-toggle="modal" data-target="#portfolioModal" (click)="portfolioModal(portfolio)">{{portfolio.title}}</a>
+                </h4>
+
+              </div>
+              <div class="card-footer justify-content-center">
+                <div class="row">
+                  <button class="btn btn-fab btn-custom btn-round mr-3" routerLink="edit/portfolio_post/{{portfolio._id}}">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="btn btn-fab btn-custom btn-round ml-3">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--  no portfolio card -->
+          <div *ngIf="portfolioData.length == 0" class="col-md-12 text-center">
+            <h5 class="text-muted">Profiles with portfolio elements have higher chance of getting hired</h5>
+            <a routerLink="portfolio_post" class="btn  btn-custom ">
+              Add Portfolio
+            </a>
+          </div>
+
+        </div>
+      </div>
+      <!-- portfolio - end -->
+      <!--  ================================================================================================
+================================================ selling stsrt ======================================== -->
+      <!-- selling-start -->
+      <div class="tab-pane connections" id="selling">
+        <div class="row">
+
+          <!-- active hourlies -->
+          <div *ngIf="hourlyOrderData.length > 0" class="col-lg-12 col-md-12">
+            <h4 class="title ml-3"> Active Hourly Orders
+              <!-- <a href="" class="btn btn-fab btn-round btn-custom pull-right">
+                <i class="material-icons">open_in_new</i>
+              </a> -->
+            </h4>
+
+            <!-- table -->
+            <div class="table-responsive-md">
+              <table class="table table-hover">
+                <thead class="thead-light">
+                  <tr>
+
+                    <th>Buyer</th>
+                    <th>Job</th>
+                    <th>Due In</th>
+                    <th>Status</th>
+
+                  </tr>
+                </thead>
+                <tbody class=" table table-bordered table-striped">
+
+                  <tr *ngFor="let hourlyOrder of hourlyOrderData">
+                    <td class="order-title">{{hourlyOrder.senderFname}}</td>
+                    <td class="order-title">
+                      <a routerLink="order/hourly/{{hourlyOrder._id}}">{{hourlyOrder.jobTitle}}</a>
+                    </td>
+                    <td class="order-title">{{hourlyOrder.duration}}</td>
+                    <td class="order-title" [className]="hourlyOrder.css">{{hourlyOrder.orderStatus}}</td>
+                    <!-- <td>
+                      <a href="" class="btn btn-fab btn-round btn-info">
+                        <i class="material-icons">open_in_new</i>
+                      </a>
+                    </td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- table end -->
+          </div>
+
+          <!-- active microjobs -->
+          <div *ngIf="microjobOrderData.length > 0" class="col-lg-12 col-md-12">
+            <h4 class="title ml-3"> Active Microjobs Orders
+              <!-- <a href="" class="btn btn-fab btn-round btn-custom pull-right">
+                <i class="material-icons">open_in_new</i>
+              </a> -->
+            </h4>
+
+            <!-- table -->
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="thead-light">
+                  <tr>
+
+                    <th>Buyer</th>
+                    <th>Job</th>
+                    <th>Due In</th>
+                    <th>Status</th>
+                    <!-- <th></th> -->
+
+                  </tr>
+                </thead>
+                <tbody class=" table table-bordered table-striped">
+
+                  <tr *ngFor=" let microjobOrder of microjobOrderData ">
+                    <td class="order-title">{{microjobOrder.senderFname}}</td>
+                    <td class="order-title">
+                      <a routerLink="order/microjob/{{microjobOrder._id}}">{{microjobOrder.jobTitle}}</a>
+                    </td>
+                    <td class="order-title">{{microjobOrder.duration}}</td>
+                    <td class="order-title" [className]="microjobOrder.css">{{microjobOrder.orderStatus}}</td>
+                    <!-- <td>
+                      <a href="" class="btn btn-fab btn-round btn-info">
+                        <i class="material-icons">open_in_new</i>
+                      </a>
+                    </td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- table end -->
+
+          </div>
+
+          <!-- selling nothing  -->
+          <div *ngIf="microjobOrderData.length == 0 && hourlyOrderData == 0 " class="col-md-12 text-center">
+            <h5 class="text-muted"> No orders yet. Post more jobs with better tags for better reachability</h5>
+            <a routerLink="hourly_post" class="btn  btn-custom mr-2">
+              Post Hourly
+            </a>
+            <a routerLink="job_post" class="btn  btn-custom ml-2">
+              Post Microjob
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- selling end -->
+
+      <!-- =============================================================
+              Buyings start
+      =================================================================== -->
+
+      <div class="tab-pane gallery" id="buying">
+        <!-- ===================================== -->
+        <div *ngIf="sentMicrojobData.length > 0" class="row">
+          <div class="col-md-12">
+            <h4 class="title ml-3"> Ordered Microjobs
+              <!-- <a href="" class="btn btn-fab btn-round btn-custom pull-right">
+                <i class="material-icons">open_in_new</i>
+              </a> -->
+            </h4>
+
+            <!-- table -->
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="thead-light">
+                  <tr>
+
+                    <th>Sender</th>
+                    <th>Job</th>
+                    <th>Due In</th>
+                    <th>Status</th>
+                    <!-- <th></th> -->
+                  </tr>
+                </thead>
+                <tbody class=" table table-bordered table-striped">
+
+                  <tr *ngFor=" let requestOrder of sentMicrojobData ">
+                    <td class="order-title">{{requestOrder.senderFname}}</td>
+                    <td class="order-title">
+                      <a routerLink="order//microjob/{{requestOrder._id}}">{{requestOrder.jobTitle}}</a>
+                    </td>
+                    <td class="order-title">{{requestOrder.duration}}</td>
+                    <td class="order-title" [className]="requestOrder.css">{{requestOrder.orderStatus}}</td>
+                    <!-- <td>
+                        <a href="" class="btn btn-fab btn-round btn-info">
+                          <i class="material-icons">open_in_new</i>
+                        </a>
+                      </td> -->
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- table end -->
+            <!-- ======================================= -->
+          </div>
+        </div>
+
+        <!--  ==================================== -->
+        <div *ngIf="sentHourlyData.length > 0" class="row">
+          <div class="col-md-12">
+            <h4 class="title ml-3"> Ordered Hourlies
+              <!-- <a href="" class="btn btn-fab btn-round btn-custom pull-right">
+                <i class="material-icons">open_in_new</i>
+              </a> -->
+            </h4>
+
+            <!-- table -->
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="thead-light">
+                  <tr>
+
+                    <th>Sender</th>
+                    <th>Job</th>
+                    <th>Due In</th>
+                    <th>Status</th>
+                    <!-- <th></th> -->
+                  </tr>
+                </thead>
+                <tbody class=" table table-bordered table-striped">
+
+                  <tr *ngFor=" let requestOrder of sentHourlyData ">
+                    <td class="order-title">{{requestOrder.senderFname}}</td>
+                    <td class="order-title">
+                      <a routerLink="/hourly/{{requestOrder.jobId}}">{{requestOrder.jobTitle}}</a>
+                    </td>
+                    <td class="order-title">{{requestOrder.duration}}</td>
+                    <td class="order-title" [className]="requestOrder.css">{{requestOrder.orderStatus}}</td>
+                    <!-- <td>
+                        <a href="" class="btn btn-fab btn-round btn-info">
+                          <i class="material-icons">open_in_new</i>
+                        </a>
+                      </td> -->
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- table end -->
+            <!-- ======================================= -->
+          </div>
+        </div>
+        <!-- =================================== -->
+        <div *ngIf="requestOrderData.length > 0" class="row">
+          <div class="col-md-12">
+            <h4 class="title ml-3"> Received Offers
+              <!-- <a href="" class="btn btn-fab btn-round btn-custom pull-right">
+                <i class="material-icons">open_in_new</i>
+              </a> -->
+            </h4>
+
+            <!-- table -->
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="thead-light">
+                  <tr>
+
+                    <th>Sender</th>
+                    <th>Job</th>
+                    <th>Delivery In</th>
+                    <th>Status</th>
+                    <!-- <th></th> -->
+                  </tr>
+                </thead>
+                <tbody class=" table table-bordered table-striped">
+
+                  <tr *ngFor=" let requestOrder of requestOrderData ">
+                    <td class="order-title">{{requestOrder.senderFname}}</td>
+                    <td class="order-title">
+                      <a routerLink="order/request/{{requestOrder._id}}">{{requestOrder.jobTitle}}</a>
+                    </td>
+                    <td class="order-title">{{requestOrder.duration}}</td>
+                    <td class="order-title" [className]="requestOrder.css">{{requestOrder.orderStatus}}</td>
+                    <!-- <td>
+                      <a href="" class="btn btn-fab btn-round btn-info">
+                        <i class="material-icons">open_in_new</i>
+                      </a>
+                    </td> -->
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- table end -->
+            <!-- ======================================= -->
+          </div>
+        </div>
+
+        <div *ngIf="sentRequestData.length > 0" class="row">
+          <div class="col-md-12">
+            <h4 class="title ml-3"> Sent Offers
+              <!-- <a href="" class="btn btn-fab btn-round btn-custom pull-right">
+                <i class="material-icons">open_in_new</i>
+              </a> -->
+            </h4>
+
+            <!-- table -->
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="thead-light">
+                  <tr>
+
+                    <th>Sender</th>
+                    <th>Job</th>
+                    <th>Delivery In</th>
+                    <th>Status</th>
+                    <!-- <th></th> -->
+                  </tr>
+                </thead>
+                <tbody class=" table table-bordered table-striped">
+
+                  <tr *ngFor=" let requestOrder of sentRequestData ">
+                    <td class="order-title">{{requestOrder.senderFname}}</td>
+                    <td class="order-title">
+                      <a routerLink="/buyers_req/{{requestOrder.jobId}}">{{requestOrder.jobTitle}}</a>
+                    </td>
+                    <td class="order-title">{{requestOrder.duration}}</td>
+                    <td class="order-title" [className]="requestOrder.css">{{requestOrder.orderStatus}}</td>
+                    <!-- <td>
+                        <a href="" class="btn btn-fab btn-round btn-info">
+                          <i class="material-icons">open_in_new</i>
+                        </a>
+                      </td> -->
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- table end -->
+            <!-- ======================================= -->
+          </div>
+        </div>
+        <div *ngIf="sentRequestData.length == 0 && requestOrderData.length == 0 && sentHourlyData == 0 && sentMicrojobData == 0 "
+          class="col-md-12 text-center">
+          <h5 class="text-muted"> You have not purchased anything yet. Explore and make your dream a reality</h5>
+          <a routerLink="req_post" class="btn  btn-custom">
+            Post Hourly
+          </a>
+
+        </div>
+        <!-- =============================================================
+              Buyings end
+      =================================================================== -->
+        <!-- col-right-end -->
+      </div>
+    </div>
+
+  </div>
+</div>
+<div *ngIf="clickedPortfolio" class="modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-labelledby="portfolioModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <app-portfolio [clickedPortfolio]="clickedPortfolio"></app-portfolio>
+  </div>
+</div>

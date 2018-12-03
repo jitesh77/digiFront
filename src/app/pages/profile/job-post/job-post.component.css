@@ -1,0 +1,14 @@
+.ng2-tag-input__text-input[_ngcontent-c7] {
+  /* display: inline; */
+  /* vertical-align: middle; */
+  /* border: none; */
+  /* padding: 0 0.5rem; */
+  /* height: 38px; */
+  /* font-size: 1em; */
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.form-file {
+  padding: 10px;
+  border-radius: 10px;
+}

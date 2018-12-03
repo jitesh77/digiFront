@@ -1,0 +1,9 @@
+.test {
+  margin: 50px;
+}
+.main-raised {
+  padding-bottom: 30px;
+}
+.card-title {
+  text-transform: capitalize;
+}

@@ -1,0 +1,222 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card card-custom">
+        <div>
+          <h3 class="card-title capitalise">
+            {{orderData.jobTitle}}
+          </h3>
+          <h6>
+            <a routerLink="/{{type}}/{{orderData.jobId}}">View Job Posting </a>
+          </h6>
+        </div>
+        <div *ngIf="!authorUser else freelancer" class="row">
+          <div class="col-md-2">
+            <h6 class="text-muted">Client</h6>
+          </div>
+          <div class="col-md-10">
+            <h6>
+              <a routerLink="/profile/{{orderData.senderId}}">{{orderData.senderFname}} </a>
+            </h6>
+          </div>
+        </div>
+        <ng-template #freelancer>
+          <div class="row">
+            <div class="col-md-2">
+              <h6 class="text-muted">Freelancer</h6>
+            </div>
+            <div class="col-md-10">
+              <h6>
+                <a routerLink="/profile/{{orderData.authorId}}">{{orderData.authorFname}}... </a>
+
+              </h6>
+            </div>
+          </div>
+        </ng-template>
+        <div class="row">
+          <div class="col-md-2">
+            <h6 class="text-muted">Message</h6>
+          </div>
+          <div class="col-md-10">
+            <h6>{{orderData.title}}</h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <h6 class="text-muted"> Delivery In</h6>
+          </div>
+          <div class="col-md-10">
+            <h6>{{orderData.duration}} Days</h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <h6 class="text-muted">Description</h6>
+          </div>
+          <div class="col-md-10">
+            <h6>{{orderData.description}}</h6>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--  col - 7  end -->
+    <div class="col-md-4">
+      <div class="card card-plain">
+        <div class="row">
+          <div *ngIf="!authorUser else senderMsg" class="col-md-12">
+            <div class="card-body " *ngIf="status == 1">
+              <div class="row justify-content-center">
+                <button (click)="acceptOrder()" class="btn btn-warning btn-block">
+                  Accept Order
+                </button>
+              </div>
+
+              <div class="row justify-content-center">
+                <button (click)="diclineOrder()" class="btn btn-custom">
+                  Decline Order
+                </button>
+              </div>
+
+            </div>
+
+            <div class="card-body " *ngIf="status == 2">
+              <div class="row justify-content-center">
+                <button (click)="completeOrder()" class="btn btn-warning btn-block">
+                  Mark As Complete
+                </button>
+              </div>
+
+              <div class="row justify-content-center">
+                <button (click)="disputeOrder()" class="btn btn-default btn-block">
+                  Create Dispute
+                </button>
+              </div>
+
+            </div>
+            <div class="card-body" *ngIf="status == 3">
+              <div class="row justify-content-center text-center">
+                <h5 class="title text-success">This order is completed</h5>
+              </div>
+              <button data-toggle="modal" data-target="#exampleModal" class="btn btn-success btn-block">
+                Give Ratings
+              </button>
+            </div>
+
+            <div class="card-body" *ngIf="status == -1">
+              <div class="row justify-content-center text-center">
+                <h5 class="title text-danger">Order is marked as disputed and under review.</h5>
+              </div>
+            </div>
+          </div>
+
+          <ng-template #senderMsg>
+            <div class="card-body" *ngIf="status == 1">
+              <div class="row justify-content-center text-center">
+                <h5 class="title">Order is not yet accepted by the freelancer.</h5>
+              </div>
+            </div>
+
+            <div class="card-body" *ngIf="status == 2">
+              <div class="row justify-content-center text-center">
+                <h5 class="title">Order is in progress.</h5>
+              </div>
+            </div>
+
+            <div class="card-body" *ngIf="status == 3">
+              <div class="row justify-content-center text-center">
+                <h5 class="title text-success">The job is completed</h5>
+              </div>
+            </div>
+
+            <div class="card-body" *ngIf="status == -1">
+              <div class="row justify-content-center text-center">
+                <h5 class="title text-danger">Order is marked as disputed and under review.</h5>
+              </div>
+            </div>
+            <div class="card-body" *ngIf="status == 3">
+              <div class="row justify-content-center text-center">
+                <button (click)="completeOrder('sender')" class="btn btn-success btn-block">
+                  Mark As Complete
+                </button>
+              </div>
+            </div>
+            <div class="card-body" *ngIf=" orderData.completedSender == true">
+              <button data-toggle="modal" data-target="#exampleModal" class="btn btn-success btn-block">
+                Give Ratings
+              </button>
+
+            </div>
+
+            <div class="card-body">
+              <div class="row justify-content-center text-center">
+                <button (click)="disputeOrder('sender')" class="btn btn-default btn-block">
+                  Create Dispute
+                </button>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let review of reviewData">
+    <div class="col-md-12 ml-auto mr-auto">
+
+      <div class="card  card-custom">
+        <div class="card-body ">
+          <h5 class="title">
+            {{review.review}}
+          </h5>
+          <span class="rating justify-content-left">
+            <star-rating [starType]="'svg'" staticColor="ok" [rating]="review.rating" [readOnly]="true" labelText="({{review.rating}})"
+              [showHalfStars]="true"></star-rating>
+          </span>
+        </div>
+        <div class="card-footer ">
+          <div class="author capitalise title">
+            <a href="/profile">
+              {{review.senderFname}}
+            </a>
+          </div>
+          <div class="stats ml-auto">
+            {{review.createdAt | timeAgo}}
+            <!-- <i class="material-icons">chat_bubble</i> 45 -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content  p-3 ">
+      <h3 class="title">Rating</h3>
+      <form (ngSubmit)="onSubmit(ratingForm)" [formGroup]="ratingForm">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group justify-content-left">
+              <label>Rating</label>
+              <star-rating-control [starType]="'svg'" staticColor="ok" formControlName="rating"></star-rating-control>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Review</label>
+              <textarea type="text" class="form-control" formControlName="review" rows="5"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-custom btn-round" [disabled]="ratingForm.invalid">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

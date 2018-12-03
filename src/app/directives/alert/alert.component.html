@@ -1,0 +1,8 @@
+<div *ngFor="let alert of alerts" class="{{ cssClass(alert) }} alert-dismissable text-center">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="removeAlert(alert)">
+    <span aria-hidden="true">
+      <i class="material-icons">clear</i>
+    </span>
+  </button>
+  <b>{{alert.message}}</b>
+</div>

@@ -1,0 +1,141 @@
+<div class="row">
+  <div class="col-lg-12 col-md-12 ml-auto mr-auto">
+    <div class="card card-plain">
+      <!-- <div class="card-icon">
+        <i class="material-icons">person</i>
+      </div> -->
+      <div class="text-center">
+
+        <h3 class="card-title">
+          Profile
+        </h3>
+      </div>
+      <form (ngSubmit)="onSubmit(updateProfile)" [formGroup]="updateProfile">
+
+
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-2">
+              <div class="row">
+                <a href="#pablo">
+                  <img *ngIf="imageUrl" src="{{imageUrl}}" alt="Thumbnail Image" class="img-raised rounded-circle" width="200px" height="200px;">
+                </a>
+              </div>
+              <div class="row mx-auto">
+                <div class=" text-center ">
+                  <input id="file" type="file" class="btn btn-default" (change)="onFileChange($event)" hidden>
+                  <div class="row text-warning text-center">
+                    {{selectedFileName}}
+                  </div>
+                  <button type="button" class="btn btn-default btn-round mt-3" (click)="fileUpload()">Change Image</button>
+                  <button *ngIf="selectedFile" type="button" class="btn btn-small btn-warning ml-5" (click)="upload()">Upload</button>
+                </div>
+              </div>
+              <div class="row mx-auto">
+                <div class="form-group ">
+                  <label>Hourly Rates</label>
+                  <input type="text " class="form-control " formControlName="hourlyRate">
+
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <div class="col-md-1 "></div>
+
+            <div class="col-md-9 col-md-offset-4 ">
+              <div class="row ">
+                <div class="col-md-6 ">
+                  <div class="form-group ">
+                    <label>Firstname*</label>
+                    <input type="text " class="form-control " formControlName="firstname">
+                    <span class="text-danger form-error float-right" *ngIf="updateProfile.get('firstname').hasError('required') && updateProfile.get('firstname').touched">
+                      <h6>Firstname is required</h6>
+                    </span>
+                  </div>
+                  <!--  -->
+                </div>
+
+                <div class="col-md-6 ">
+                  <div class="form-group ">
+                    <label>Lastname*</label>
+                    <input type="text " class="form-control " formControlName="lastname">
+                    <span class="text-danger form-error float-right" *ngIf="updateProfile.get('lastname').hasError('required') && updateProfile.get('lastname').touched">
+                      <h6>Lastname is required</h6>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <!--  -->
+
+              <!--  -->
+              <div class="row ">
+                <div class="col-md-6 ">
+                  <div class="form-group ">
+                    <label>Country*</label>
+                    <input type="text " class="form-control " formControlName="country">
+                    <span class="text-danger form-error float-right" *ngIf="updateProfile.get('country').hasError('required') && updateProfile.get('country').touched">
+                      <h6>Country is required</h6>
+                    </span>
+                  </div>
+                  <!--  -->
+                </div>
+
+                <div class="col-md-6 ">
+                  <!-- input with datetimepicker -->
+                  <!-- <div class="form-group">
+                    <label class="label-control">Date Of Birth</label>
+                    <input type="date" name="date" class="form-control datetimepicker" formControlName="dob" />
+                  </div> -->
+                  <div class="form-group">
+                    <label>Gender*</label>
+                    <select class="form-control" formControlName="gender">
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <span class="text-danger form-error float-right" *ngIf="updateProfile.get('gender').hasError('required') && updateProfile.get('gender').touched">
+                      <h6>Gender is required</h6>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+              <label>Skills (Select Skills From The Dropdown. Optional)</label>
+              <tag-input inputClass="bck" formControlName="skills" [theme]="'minimal'" name="items" [onlyFromAutocomplete]="true" [placeholder]="'Skills'"
+                [secondaryPlaceholder]="'Add Skills'">
+                <tag-input-dropdown [showDropdownIfEmpty]="false" [dynamicUpdate]="false" [displayBy]="'name'" [identifyBy]="'_id'" [autocompleteItems]="skillsData"
+                  [limitItemsTo]="3">
+                  <ng-template let-item="item" let-index="index">
+                    {{ item.name }}
+                  </ng-template>
+                </tag-input-dropdown>
+              </tag-input>
+
+              <!--  -->
+              <div class="form-group ">
+                <label>Tagline (Optional)</label>
+                <input type="text " class="form-control " formControlName="tagline">
+                <span class="bmd-help">Enter a single sentence description of your professional skills/experience</span>
+              </div>
+              <!--  -->
+              <div class="form-group ">
+                <label>Description (Optional)</label>
+                <textarea type="text " rows="5 " class="form-control " formControlName="description"></textarea>
+                <span class="bmd-help">Describe your strengths, skills and experience</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3 class="text-center">
+          <flash-messages></flash-messages>
+        </h3>
+        <div class="text-center ">
+          <button class="btn btn-warning btn-round" type="submit" [disabled]="updateProfile.invalid"> Save </button>
+        </div>
+      </form>
+    </div>
+  </div>

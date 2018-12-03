@@ -1,0 +1,54 @@
+<div class="blogs-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 ml-auto mr-auto text-center">
+        <h2 class="title">Buyers Requests</h2>
+      </div>
+    </div>
+    <div class="row">
+
+      <!--  -->
+      <div class="card card-custom" *ngFor="let request of buyerRequests">
+        <div class="row">
+          <div class="col-md-9">
+            <h6 class=" card-category text-info ">{{request.category.name}}</h6>
+            <h3 class="card-title ">
+              <a href="/buyers_req/{{request._id}}">{{request.title}}</a>
+            </h3>
+            <p class="card-description ">
+              {{request.description}}
+
+            </p>
+            <p>
+              <a href="/buyers_req/{{request._id}}"> Read More </a>
+            </p>
+          </div>
+
+
+          <div class="col-md-3 ">
+            <div class="card card-profile text-center card-plain ">
+              <div>
+                <h3 class="card-title text-default ">$ {{request.budget}}</h3>
+                <h6>Duration: {{request.duration}} Days</h6>
+              </div>
+              <div class="card-body ">
+                <a href="buyers_req/{{request._id}}">
+                  <button class="btn btn-fab btn-custom btn-round mr-3">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="btn btn-fab btn-custom btn-round ml-3">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>

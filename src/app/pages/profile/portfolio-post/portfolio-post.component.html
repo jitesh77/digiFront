@@ -1,0 +1,137 @@
+<div class="col-md-10 col-lg-10 ml-auto mr-auto">
+  <div class="row text-center ">
+    <div class="col-md-12">
+      <h3 class="title">Add Portfolio</h3>
+      <app-alert></app-alert>
+    </div>
+  </div>
+  <form (ngSubmit)="onSubmit(portfolio)" [formGroup]="portfolio">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Title*</label>
+          <input type="text" class="form-control" formControlName="title">
+          <span class="bmd-help">Minimum 5 characters</span>
+          <span class="text-danger form-error float-right" *ngIf="portfolio.get('title').hasError('required') && portfolio.get('title').touched">
+            <h6>Title is required</h6>
+          </span>
+          <span class="text-danger form-error float-right" *ngIf="portfolio.get('title').hasError('minlength') && portfolio.get('title').touched">
+            <h6> Minimum of 5 characters </h6>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Project Link (Optional)</label>
+          <input type="text" class="form-control" formControlName="links">
+        </div>
+      </div>
+      <!--  -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Project Date (Optional)</label>
+          <input type="date" class="form-control" formControlName="date">
+        </div>
+      </div>
+      <!--  -->
+    </div>
+    <!--  -->
+
+    <div class="row">
+      <!--  -->
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Category*</label>
+          <!-- <input type="text" class="form-control" formControlName="category"> -->
+          <select class="form-control" formControlName="category">
+            <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
+          </select>
+          <span class="text-danger form-error float-right" *ngIf="portfolio.get('category').hasError('required') && portfolio.get('category').touched">
+            <h6>category is required</h6>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group" *ngIf="!portfolio.get('category').hasError('required')">
+          <label>Subcategory*</label>
+          <select class="form-control" formControlName="subCategory">
+            <option *ngFor="let subcategory of subCategoryList" [ngValue]="subcategory">{{subcategory.name}}</option>
+          </select>
+          <span class="text-danger form-error float-right" *ngIf="portfolio.get('subCategory').hasError('required') && portfolio.get('subCategory').touched">
+            <h6>Subcategory is required</h6>
+          </span>
+        </div>
+      </div>
+      <!--  -->
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <label> Tags* (Select from dropdown or add your own tag. Press enter to save.)</label>
+        <div>
+          <tag-input inputClass="bck" formControlName="tags" [theme]="'minimal'" name="items" [onlyFromAutocomplete]="false" [placeholder]="'Tags'"
+            [secondaryPlaceholder]="'+'">
+            <tag-input-dropdown [showDropdownIfEmpty]="false" [dynamicUpdate]="false" [displayBy]="'name'" [identifyBy]="'_id'" [autocompleteItems]="allTagList"
+              [limitItemsTo]="3">
+              <ng-template let-item="item" let-index="index">
+                {{ item.name }}
+              </ng-template>
+            </tag-input-dropdown>
+          </tag-input>
+          <span class="text-danger form-error float-right" *ngIf="portfolio.get('tags').hasError('required') && portfolio.get('tags').touched">
+            <h6>Tag is required</h6>
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+    <!--  -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Description*</label>
+          <textarea type="text" rows="10" class="form-control" formControlName="description"></textarea>
+          <span class="text-danger form-error float-right" *ngIf="portfolio.get('description').hasError('required') && portfolio.get('description').touched">
+            <h6>Description is required</h6>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Add Images*</label>
+          <br>
+          <input type="file" id="fileIn" class="form-file form-control" (change)="onFileChange($event)" hidden>
+          <button type="button" class="btn btn-fab btn-round btn-warning" (click)="selectFileInput()">
+            <i class="material-icons">add</i>
+          </button>
+          <!-- <button type="button" class="btn btn-small btn-warning" (click)="selectFileInput()">Add Image</button> -->
+          {{selectedFileName}}
+          <button *ngIf="selectedFile" type="button" class="btn btn-small btn-warning ml-5" (click)="upload()">Upload</button>
+          <span class="text-warning"> {{uploadMessage}} </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <img *ngIf="imageUrl" src={{imageUrl}} alt="" width="300px" height="300px">
+      </div>
+
+    </div>
+    <!--  -->
+    <div class="text-center test">
+      <button type="submit" class="btn btn-warning btn-round" [disabled]="portfolio.invalid"> Save </button>
+      <!-- <a routerLink="/dashboard" class="btn btn-warning btn-round">Save</a> -->
+    </div>
+    <div class="test">
+
+    </div>
+  </form>
+</div>

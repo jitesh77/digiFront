@@ -1,0 +1,193 @@
+<app-navbar></app-navbar>
+<!-- <ngx-spinner bdColor="rgba(255,255,255,1)" size="medium" color="#ff9800" type="square-jelly-box" style="height: 100vh;">
+</ngx-spinner> -->
+<div *ngIf="!isLoading" class="main main-raised">
+  <div class="container">
+    <div class="row ">
+
+      <div class="col-md-7">
+        <div class="row">
+          <h2 class="title">
+            {{requests.title}}
+          </h2>
+        </div>
+        <div class="row">
+          <div class="text-default">
+            <h6>Added on : 19 June 2018</h6>
+          </div>
+        </div>
+
+
+        <!-- row -->
+        <div class="card card-plain row">
+          <div [innerHTML]="requests.brDescription"></div>
+
+        </div>
+        <!-- row -->
+        <!-- tags row start -->
+        <h4 class="card-title">Tags</h4>
+        <span *ngFor="let tag of requests.tags">
+          <span class="badge badge-pill badge-default">{{tag.display}}</span>
+        </span>
+
+        <!-- tags row end -->
+
+
+      </div>
+
+      <div class="col-md-4 offset-md-1">
+        <div class="row">
+          <div class="card card-profile card-margin">
+
+            <div class="card-body ">
+
+              <!--  -->
+              <div class="row text-center">
+                <div class="col-md-12">
+                  <h2>
+                    <span class="text-warning title">$ {{requests.budget}}</span>
+                  </h2>
+
+                </div>
+              </div>
+              <hr/>
+              <!--  -->
+
+              <div class="row  ml-auto mr-auto">
+                <div class="col-md-12">
+                  <h4>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i> Duration: {{requests.duration}} Days
+                  </h4>
+                </div>
+              </div>
+
+
+              <hr/>
+              <a *ngIf="!authorUser; else user" class="btn  btn-warning btn-round btn-block" (click)="orderModal();">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>Make Offer</a>
+              <ng-template #user>
+                <button class="btn  btn-warning btn-round btn-block" routerLink="/dashboard/edit/req_post/{{requests._id}}">
+                  <i class="material-icons">edit</i>Edit</button>
+                <br>
+
+                <button class="btn  btn-custom btn-round btn-block">
+                  <i class="material-icons">delete</i>Delete</button>
+              </ng-template>
+
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- col -->
+        <!-- urse details -->
+        <div class="row">
+          <div class="card card-profile">
+            <div class="card-avatar">
+              <a href="/profile/{{authorDetails._id}}">
+                <img class="img" src="{{authorDetails.ProfilePicture}}">
+              </a>
+            </div>
+            <div class="card-body ">
+              <!-- <h6 class="card-category text-gray">MEAN | MERN | Nativescript</h6> -->
+              <a href="/profile/{{authorDetails._id}}">
+                <h4 class="card-title">{{authorDetails.fname}} {{authorDetails.lname}}</h4></a>
+              <!-- <h6 class="card-category text-gray">{{authorDetails.tagline}}</h6> -->
+              <div class="card-description">
+                <h5 class="card-title rating">
+                  <star-rating [starType]="'svg'" staticColor="danger" [rating]="authorDetails.rating" [readOnly]="true" labelText="({{authorDetails.rating | number : '1.1-1'}})"
+                    [showHalfStars]="true"></star-rating>
+                </h5>
+                <p>
+                  {{authorDetails.description}}
+                </p>
+              </div>
+              <button (click)="messages()" class="btn btn-custom btn-round">
+                <i class="material-icons">local_post_office</i> Contact</button>
+            </div>
+          </div>
+        </div>
+        <!-- urse details end-->
+      </div>
+      <!-- col-right-end -->
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div *ngIf="postOrder; else message" class="modal-content">
+      <div class="modal-header ">
+        <h2 class="modal-title " id="exampleModalLabel">Order Form</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-success">
+        <form (ngSubmit)="onSubmit(orderRequests)" [formGroup]="orderRequests">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" [ngClass]="{'has-danger': orderRequests.get('title').hasError('required') && orderRequests.get('title').touched}">
+                <label>Message Subject*</label>
+                <input type="text" class="form-control" formControlName="title">
+                <span class="text-danger float-left" *ngIf="orderRequests.get('title').hasError('required') && orderRequests.get('title').touched">
+                  <h6>Subject is required</h6>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" [ngClass]="{'has-danger': orderRequests.get('duration').hasError('required') && orderRequests.get('duration').touched}">
+                <label>Expected Delivery In (Days)*</label>
+                <input type="number" class="form-control" formControlName="duration">
+                <span class="text-danger float-left" *ngIf="orderRequests.get('duration').hasError('required') && orderRequests.get('duration').touched">
+                  <h6>Duration is required</h6>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" [ngClass]="{'has-danger': orderRequests.get('description').hasError('required') && orderRequests.get('description').touched}">
+                <label>Other Details*</label>
+                <textarea type="text" rows="10" class="form-control" formControlName="description"></textarea>
+                <span class="text-danger float-left" *ngIf="orderRequests.get('description').hasError('required') && orderRequests.get('description').touched">
+                  <h6>Duration is required</h6>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-custom btn-round" [disabled]="orderRequests.invalid">Submit</button>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+
+    <ng-template #message>
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <h2 class="title" id="exampleModalLabel">Order Submitted</h2>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+        </div>
+        <div class="modal-body text-success text-center">
+          <button type="button" class="btn btn-round btn-warning" data-dismiss="modal" aria-label="Close">
+            Close
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+  </div>
+
+
+</div>

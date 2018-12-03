@@ -1,0 +1,146 @@
+<nav class="navbar navbar-default fixed-top navbar-expand-md" color-on-scroll="100" id="sectionsNav">
+  <div class="container">
+    <div class="navbar-translate">
+      <a class="navbar-brand" href="/">
+        <img id="logo1" src="../assets/img/digi/1.png" alt="logo" width="125px" height="35px">
+        <!-- <h4 id="logo2">
+            <strong>Digiwage</strong>
+          </h4> -->
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/">
+            <i class="material-icons">home</i> Home
+          </a>
+        </li> -->
+
+        <li class="dropdown nav-item">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+            <!-- <i class="material-icons">account_circle</i> -->
+            Buying
+          </a>
+          <div class="dropdown-menu buying dropdown-menu-right">
+            <a routerLink="req_post" class="dropdown-item">Post A Request</a>
+            <!-- <a routerLink="/dashboard" class="dropdown-item">Orders</a> -->
+            <a routerLink="myBuyerRequests" class="dropdown-item">Manage Requests</a>
+          </div>
+        </li>
+
+        <!--  -->
+
+        <li class="dropdown nav-item">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+            <!-- <i class="material-icons">account_circle</i> -->
+            Selling
+          </a>
+          <div class="dropdown-menu selling dropdown-menu-right">
+            <a routerLink="job_post" class="dropdown-item">Post A Microjob</a>
+            <a routerLink="hourly_post" class="dropdown-item">Post An Hourly</a>
+            <!-- <a routerLink="/dashboard" class="dropdown-item">Orders</a> -->
+            <a routerLink="myMicrojobs" class="dropdown-item">Manage Microjobs</a>
+            <a routerLink="myHourlies" class="dropdown-item">Manage Hourlies</a>
+          </div>
+        </li>
+
+        <!--  -->
+
+
+        <li class="nav-item dropdown ">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons">question_answer</i>Messages
+            <span class="text-warning notifier" *ngIf="messageListData.length > 0">
+              <i class="material-icons">
+                fiber_manual_record
+              </i>
+            </span>
+          </a>
+          <div *ngFor="let receiver of messageListData">
+            <div class="dropdown-menu notification dropdown-menu-right custom-link">
+              <div *ngIf="receiver.pOne == currentUser.id; else user">
+                <a routerLink="/messages/room/{{receiver.room}}/{{receiver.pTwo}}" class="card card-plain dropdown-item">
+                  <div class="card-body">
+                    <p>New message from
+                      <b>{{receiver.pTwoFname}}</b>
+                    </p>
+                    <p class="mt-2 capitalise text-muted"> {{receiver.lastMessage}}</p>
+                  </div>
+
+                </a>
+              </div>
+              <ng-template #user>
+                <a routerLink="/messages/room/{{receiver.room}}/{{receiver.pOne}}" class="card card-custom dropdown-item">
+                  <div class="card-body">
+                    <div class="card-body">
+                      <p>New message from
+                        <b>{{receiver.pOneFname}}</b>
+                      </p>
+                      <p class="mt-2 capitalise text-muted"> {{receiver.lastMessage}}</p>
+                    </div>
+                  </div>
+                </a>
+              </ng-template>
+              <div class="pt-3 ml-2">
+                <h6>
+                  <b>
+                    <a class="text-warning" routerLink="messages"> See All Messages</a>
+                  </b>
+                </h6>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons">notification_important</i>Notification
+            <span class="text-warning notifier" *ngIf="notificationListData.length > 0">
+              <i class="material-icons">
+                fiber_manual_record
+              </i>
+            </span>
+          </a>
+          <!-- <div class="dropdown-menu notification dropdown-menu-right custom-link">
+            <a routerLink="/dashboard" class="card dropdown-item">
+              <div class="card-body">
+                New ratings from Anoop for your job "I will make educational Video"
+              </div>
+            </a>
+            <a routerLink="/dashboard" class="card dropdown-item">
+              <div class="card-body">
+                Payment released by John for the job "I will make a wordpress blog"
+              </div>
+            </a>
+
+          </div> -->
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">
+            <i class="material-icons">dashboard</i>Dashboard
+          </a>
+        </li>
+
+
+
+        <li class="dropdown nav-item">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+            <i class="material-icons">account_circle</i>{{currentUser.fname}}
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a routerLink="/dashboard" class="dropdown-item">Account</a>
+            <a routerLink="/profile/{{currentUser.id}}" class="dropdown-item">Profile</a>
+            <!-- <a routerLink="/dashboard" class="dropdown-item">Settings</a> -->
+            <a (click)="logOut()" class="dropdown-item">Sign out</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

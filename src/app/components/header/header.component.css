@@ -1,0 +1,15 @@
+.header-filter::before {
+  /* background: rgba(0, 0, 0, 0); */
+  /* background: #ffffff; */
+  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+.page-header .title,
+.page-header h4 {
+  /* color: #ffffff; */
+  color: #3c4858;
+}
+@media (min-width: 1200px) {
+  .header-filter::before {
+    background: rgba(0, 0, 0, 0);
+  }
+}

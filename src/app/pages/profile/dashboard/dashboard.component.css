@@ -1,0 +1,42 @@
+/* .main {
+
+  margin-top: 15vh;
+} */
+/* .main-raised {
+  padding-top: 30px;
+} */
+/* 
+.card-profile .card-avatar,
+.card-testimonial .card-avatar {
+  max-width: 130px;
+  max-height: 130px;
+  margin: -20px auto 0;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 0;
+  -webkit-box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56),
+    0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56),
+    0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+.card-profile {
+  text-align: center;
+}
+.card-profile .card-avatar img,
+.card-testimonial .card-avatar img {
+  width: 100%;
+  height: auto;
+}
+
+.badge {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+} */
+.page-header {
+  height: 40vh;
+}
+.button-alert {
+  margin: 0px;
+  padding: 8px;
+}

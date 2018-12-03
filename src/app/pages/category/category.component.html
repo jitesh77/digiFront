@@ -1,0 +1,172 @@
+<app-navbar></app-navbar>
+<div class="page-header justify-content-center" data-parallax="true" style="background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);;">
+  <h2 class="title">{{name}}</h2>
+</div>
+<!-- <app-headimg [tag]="name"></app-headimg> -->
+<div class="">
+
+
+  <div class="main main-raised">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 ml-auto mr-auto">
+          <div class="row">
+            <div class="col-md-12">
+              <h4 class="title pl-2">Popular Topics</h4>
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn btn-custom ml-4" *ngFor="let subCategory of subCategoriesData | slice:0:5; let i=index" (click)="subPostNavigate(subCategory._id, subCategory.name)">{{subCategory.name}}</button>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h4 *ngIf="microjobData" class="title pl-2">Microjobs
+                <!-- <a href="" class="see text-warning float-right">See All
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </a> -->
+              </h4>
+            </div>
+          </div>
+          <!-- row-1 -->
+          <div class="row">
+            <div class="col-md-3" *ngFor="let microjob of microjobData| slice:0:8;" let i="index">
+              <a href="microjob/{{microjob._id}}">
+                <div class="card card-blog">
+                  <div class="card-header card-header-image">
+                    <a href="microjob/{{microjob._id}}">
+                      <img class="img" src="{{microjob.file}}">
+                    </a>
+                  </div>
+                  <div class="card-body ">
+                    <h4 class="title-test pull-right text-success">${{microjob.price}}</h4>
+                    <h6 class="card-category text-success">{{microjob.category.name}}</h6>
+                    <h4 class="card-title">
+                      <a href="microjob/{{microjob._id}}">{{microjob.title | truncate:[30, '...'] }}</a>
+                    </h4>
+
+                  </div>
+                  <div class="card-footer ">
+                    <div class="author">
+                      <a href="/profile/{{microjob.authorId}}">
+                        <img src="{{microjob.authorProfilePicture}}" alt="..." class="avatar img-raised">
+                        <span>{{microjob.authorFname}}</span>
+                      </a>
+                    </div>
+                    <div class="stats ml-auto">
+                      <i class="material-icons">stars</i>{{microjob.rating | number : '1.1-1'}}
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+          </div>
+          <!-- microjob end -->
+          <div class="row">
+            <div class="col-md-12">
+              <h4 *ngIf="hourlyData" class="title pl-2">Hourlies
+                <!-- <a href="" class="see text-warning float-right">See All
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </a> -->
+              </h4>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-3" *ngFor="let hourly of hourlyData | slice:0:8;" let i="index">
+              <div>
+                <a href="/hourly/{{hourly._id}}">
+                  <div class="card card-blog">
+                    <div class="card-header card-header-image">
+                      <a href="/hourly/{{hourly._id}}">
+                        <img class="img" src="{{hourly.file}}">
+                      </a>
+                    </div>
+                    <div class="card-body ">
+                      <h4 class="title-test text-center text-success">${{hourly.rate}} / Hr</h4>
+                      <!-- <h6 class="card-category text-info">Crypto</h6> -->
+                      <h4 class="card-title">
+                        <a href="hourly/{{hourly._id}}">{{hourly.title | truncate:[30, '...'] }}</a>
+                      </h4>
+
+                    </div>
+                    <div class="card-footer ">
+                      <div class="author">
+                        <a href="/profile/{{hourly.authorId}}">
+                          <img src="{{hourly.authorProfilePicture}}" alt="..." class="avatar img-raised">
+                          <span>{{hourly.authorFname}}</span>
+                        </a>
+                      </div>
+                      <div class="stats ml-auto">
+                        <i class="material-icons">stars</i>{{hourly.rating | number : '1.1-1'}}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+          </div>
+          <!-- hourly end -->
+          <div class="row">
+            <div class="col-md-12">
+              <h4 *ngIf="buyerRequestData" class="title pl-2">Buyer Requests
+                <!-- <a href="" class="see text-warning float-right">See All
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </a> -->
+              </h4>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="card card-custom" *ngFor="let request of buyerRequestData | slice:0:4;" let i="index">
+              <div class="row">
+                <div class="col-md-9">
+                  <h6 class=" card-category text-info ">{{request.category.name}}</h6>
+                  <h3 class="card-title ">
+                    <a href="/buyers_req/{{request._id}}">{{request.title}}</a>
+                  </h3>
+                  <p class="card-description ">
+                    {{request.description | truncate:[300, '...']}}
+
+                  </p>
+                  <p>
+                    <a href="/buyers_req/{{request._id}}"> Read More </a>
+                  </p>
+                  <p class="author ">
+                    by
+                    <a href="/profile/{{request.authorId}}">
+                      <b>{{request.authorFname}}</b>
+                    </a>, {{request.updatedAt | timeAgo}}
+                  </p>
+                </div>
+
+
+                <div class="col-md-3 ">
+                  <div class="card card-profile text-center card-plain ">
+                    <div>
+                      <h3 class="card-title text-default ">$ {{request.budget}}</h3>
+                      <h6>Duration: {{request.duration}} Days</h6>
+                    </div>
+                    <div class="card-body ">
+                      <a href="buyers_req/{{request._id}}">
+                        <button type="button " class="btn-custom btn ">Send Request</button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+          <div class="row">
+            <div *ngIf="!buyerRequestData && !microjobData && !hourlyData" class="col-md-8 ml-auto mr-auto text-center mt-5 mb-5">
+              <h4 class="title">No Posts Yet</h4>
+            </div>
+          </div>
+          <!--  -->
+        </div>
+      </div>
+    </div>
+
+    <app-footer></app-footer>

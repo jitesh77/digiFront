@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+<div class="page-header header-filter" style="background-image: url(&apos;../assets/img/new/login-2.jpg&apos;); background-size: cover; background-position: top center;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-sm-6 ml-auto mr-auto">
+        <div class="card card-signup">
+          <div class="col-md-12 col-sm-12 ml-auto mr-auto">
+            <div class="card-header card-header-warning text-center">
+              <h4 class="card-title">Log in</h4>
+            </div>
+          </div>
+          <!-- <app-alert></app-alert> -->
+          <flash-messages></flash-messages>
+          <form [formGroup]="loginForm" (ngSubmit)="submitLogin();">
+            <div class="card-body">
+              <div class="input-group input-new">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="material-icons">mail</i>
+                  </span>
+                </div>
+                <input type="email" class="form-control" formControlName="email" placeholder="Email...">
+              </div>
+              <div class="input-group input-new">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="material-icons">lock_outline</i>
+                  </span>
+                </div>
+                <input type="password" class="form-control" formControlName="password" placeholder="Password...">
+              </div>
+
+            </div>
+            <div class="footer text-center">
+              <button class="btn btn-warning btn-wd btn-rounded" [disabled]="loginForm.invalid">Sign In</button>
+            </div>
+          </form>
+          <div class="text-center">
+            New User?
+            <a routerLink="/signup">Register</a>
+          </div>
+          <div class="text-center mt-3">
+            <a routerLink="/forgot">Forgot Password?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

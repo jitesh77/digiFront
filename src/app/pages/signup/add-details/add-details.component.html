@@ -1,0 +1,109 @@
+<div class="signup-page">
+  <app-navbar></app-navbar>
+  <div class="page-header header-filter" filter-color="purple" style="background-image: url('../assets/img/bg7.jpg')">
+    <div class="container">
+      <div class="row box">
+        <div class="col-md-10 ml-auto mr-auto">
+          <div class="card card-signup">
+            <h2 class="card-title text-center">Let's get started </h2>
+            <app-alert></app-alert>
+            <!-- form start -->
+            <form class="form" (ngSubmit)="onSubmit(addDetails)" [formGroup]="addDetails">
+              <div class="row">
+                <div class="col-md-3 mx-auto text-center profile-img">
+                  <div class="row">
+                    <img src="{{profilePicture}}" class="img-raised rounded-circle ml-auto mr-auto " width="200px" height="200px" alt="">
+                  </div>
+                  <div class="row">
+                    <input id="file" type="file" class="btn btn-default" (change)="onFileChange($event)" hidden>
+
+                  </div>
+
+                  <button type="button" class="btn btn-default btn-round mt-3" (click)="fileUpload()">Add Image</button>
+                  <span class="text-warning">{{selectedFileName}}</span>
+                  <br>
+                  <span class="text-warning">{{uploadMessage}}</span>
+                  <button *ngIf="selectedFile" type="button" class="btn btn-small btn-round btn-warning" (click)="upload()">Upload</button>
+                </div>
+                <div class="col-md-7 mx-auto">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group" [ngClass]="{'has-danger': addDetails.get('username').hasError('required') && addDetails.get('username').touched }">
+                        <label>Username*</label>
+                        <input type="text" class="form-control" formControlName="username">
+                        <span class="bmd-help">Minimum 3 alphanumeric characters</span>
+                        <span class="text-danger form-error float-right" *ngIf="addDetails.get('username').hasError('required') && addDetails.get('username').dirty">Please
+                          enter username</span>
+                        <span class="form-error float-right" [ngClass]="{'text-danger': username == false, 'text-success': username ==true}" *ngIf="addDetails.get('username').value.length >= 3">{{usernameMessage}}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group" [ngClass]="{'has-danger': addDetails.get('firstname').hasError('required') && addDetails.get('firstname').touched }">
+                        <label>Firstname*</label>
+                        <input type="text" class="form-control" formControlName="firstname">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group" [ngClass]="{'has-danger': addDetails.get('lastname').hasError('required') && addDetails.get('lastname').touched }">
+                        <label>Lastname*</label>
+                        <input type="text" class="form-control" formControlName="lastname">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group" [ngClass]="{'has-danger': addDetails.get('country').hasError('required') && addDetails.get('country').touched }">
+                        <label>Country*</label>
+                        <input type="text" class="form-control" formControlName="country">
+                      </div>
+                    </div>
+                    <!-- FIXME: fix select box -->
+                    <div class="col-md-6">
+                      <div class="form-group" [ngClass]="{'has-danger': addDetails.get('gender').hasError('required') && addDetails.get('gender').touched }">
+                        <label>Gender*</label>
+                        <select class="form-control" formControlName="gender" plceholder="gender">
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Tagline (optional) </label>
+                        <input type="text" class="form-control" formControlName="tagline">
+                        <span class="bmd-help">Enter a single sentence description of your professional skills/experience</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Description (optional)</label>
+                        <textarea type="text" rows="10" class="form-control" formControlName="Description" formControlName="description"></textarea>
+                        <span class="bmd-help">Describe your strengths, skills and experience</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button class="btn btn-warning btn-round" type="submit" [disabled]="addDetails.invalid"> Save </button>
+                  </div>
+
+
+                </div>
+              </div>
+            </form>
+            <!--  -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

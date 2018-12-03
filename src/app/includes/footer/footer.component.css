@@ -1,0 +1,16 @@
+.footer-black {
+  background: #232323;
+  background: radial-gradient(ellipse at center, #585858 0, #232323 100%);
+  background-size: 550% 450%;
+  color: #fff;
+  text-align: left;
+}
+
+.footer-big {
+  margin-top: 1.8rem;
+  padding: 1.875rem 0;
+}
+
+h5 {
+  color: #fff;
+}

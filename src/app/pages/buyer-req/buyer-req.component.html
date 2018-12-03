@@ -1,0 +1,8 @@
+<app-navbar></app-navbar>
+<app-headimg [tag]="name"></app-headimg>
+
+<div class="main main-raised">
+  <app-requests [requestData]="requestData" [message]="message" [list]="list"></app-requests>
+  <app-paginator (pageEvent)="receivePage($event)"></app-paginator>
+</div>
+<app-footer></app-footer>

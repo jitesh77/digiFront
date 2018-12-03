@@ -1,0 +1,119 @@
+<div class="col-md-10 col-lg-10 ml-auto mr-auto">
+  <div class="row text-center ">
+    <div class="col-md-12">
+      <h3 class="title">Request For A Job</h3>
+      <!-- <app-alert></app-alert> -->
+    </div>
+  </div>
+  <form (ngSubmit)="onSubmit(requestjob)" [formGroup]="requestjob">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label> Title*</label>
+          <input type="text" class="form-control" formControlName="title">
+          <span class="bmd-help">Minimum 5 characters</span>
+          <span class="text-danger form-error float-right" *ngIf="requestjob.get('title').hasError('required') && requestjob.get('title').touched">
+            <h6>Title is required</h6>
+          </span>
+          <span class="text-danger form-error float-right" *ngIf="requestjob.get('title').hasError('minlength') && requestjob.get('title').touched">
+            <h6> Minimum of 5 characters </h6>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label> Budget In Dollars*</label>
+          <input type="number" class="form-control" formControlName="budget">
+          <span class="text-danger form-error float-right" *ngIf="requestjob.get('budget').hasError('required') && requestjob.get('budget').touched">
+            <h6>Budget is required</h6>
+          </span>
+        </div>
+      </div>
+      <!--  -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label> Duration In Days*</label>
+          <input type="number" class="form-control" formControlName="duration">
+          <span class="text-danger form-error float-right" *ngIf="requestjob.get('duration').hasError('required') && requestjob.get('duration').touched">
+            <h6>Duration is required</h6>
+          </span>
+        </div>
+      </div>
+      <!--  -->
+    </div>
+    <!--  -->
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group bmd-form-group">
+          <label>Category*</label>
+          <select class="form-control" formControlName="category">
+            <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
+          </select>
+          <span class="text-danger form-error float-right" *ngIf="requestjob.get('category').hasError('required') && requestjob.get('category').touched">
+            <h6>Category is required</h6>
+          </span>
+        </div>
+      </div>
+      <!--  -->
+      <div class="col-md-12">
+        <div class="form-group bmd-form-group" *ngIf="!requestjob.get('category').hasError('required')">
+          <label>Subcategory*</label>
+          <select class="form-control" formControlName="subCategory">
+            <option *ngFor="let subcategory of subCategoryList" [ngValue]="subcategory">{{subcategory.name}}</option>
+          </select>
+          <span class="text-danger form-error float-right" *ngIf="requestjob.get('subCategory').hasError('required') && requestjob.get('subCategory').touched">
+            <h6>Subcategory is required</h6>
+          </span>
+        </div>
+      </div>
+      <!--  -->
+    </div>
+
+    <!--  -->
+    <div class="row">
+      <div class="col-md-12">
+        <label> Tags* (Select from dropdown or add your own tag. Press enter to save.)</label>
+        <div>
+          <tag-input inputClass="bck" formControlName="tags" [theme]="'minimal'" name="items" [onlyFromAutocomplete]="false" [placeholder]="'Tags'"
+            [secondaryPlaceholder]="'+'">
+            <tag-input-dropdown [showDropdownIfEmpty]="false" [dynamicUpdate]="false" [displayBy]="'name'" [identifyBy]="'_id'" [autocompleteItems]="allTagList"
+              [limitItemsTo]="3">
+              <ng-template let-item="item" let-index="index">
+                {{ item.name }}
+              </ng-template>
+            </tag-input-dropdown>
+          </tag-input>
+          <span class="text-danger form-error float-right" *ngIf="requestjob.get('tags').hasError('required') && requestjob.get('tags').touched">
+            <h6>Tag is required</h6>
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!--  -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label> Description*</label>
+          <textarea type="text" rows="5" class="form-control" formControlName="description"></textarea>
+          <span class="text-danger form-error float-right" *ngIf="requestjob.get('description').hasError('required') && requestjob.get('description').touched">
+            <h6>Description is required</h6>
+          </span>
+        </div>
+      </div>
+    </div>
+    <flash-messages class="text-center"></flash-messages>
+    <div class="text-center test">
+      <button type="submit" class="btn btn-warning btn-round" [disabled]="requestjob.invalid"> Post </button>
+    </div>
+    <div class="test">
+
+    </div>
+  </form>
+</div>

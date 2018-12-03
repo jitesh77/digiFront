@@ -1,0 +1,63 @@
+<div class="signup-page">
+  <app-navbar></app-navbar>
+  <div class="page-header header-filter" filter-color="purple" style="background-image: url('../assets/img/bg7.jpg')">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 ml-auto mr-auto">
+          <div class="card card-signup">
+            <h2 class="card-title text-center">Register</h2>
+            <flash-messages class="text-center"></flash-messages>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-5 ml-auto">
+                  <div class="info info-horizontal">
+                    <img src="../assets/img/digi/sign.jpg" class="img-fluid" alt="">
+                  </div>
+                </div>
+                <div class="col-md-5 mr-auto">
+
+                  <form class="form" (ngSubmit)="onSubmit(signup)" [formGroup]="signup">
+
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Email</label>
+                      <input type="email" class="form-control" formControlName="email">
+                      <span class="text-danger form-error" *ngIf="signup.get('email').hasError('email') && signup.get('email').dirty">Enter
+                        a valid email</span>
+                    </div>
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Password</label>
+                      <input type="password" class="form-control" formControlName="password">
+                      <span class="bmd-help">Minimum 6 characters</span>
+                    </div>
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Confirm Password</label>
+                      <input type="password" class="form-control" formControlName="confirmPassword">
+                      <span class="text-danger form-error" *ngIf="signup.get('password').value != signup.get('confirmPassword').value && signup.get('confirmPassword').touched">
+                        Password does not match</span>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" formControlName="tnc">
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                        I agree to the
+                        <a href="/">terms and conditions</a>.
+                      </label>
+                    </div>
+                    <div class="text-center">
+                      <button class="btn btn-warning btn-round" type="submit" [disabled]="signup.invalid"> Get Started</button>
+                    </div>
+                  </form>
+                  <div class="text-center">
+                    Already have an account?
+                    <a routerLink="/login"> Log In</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
